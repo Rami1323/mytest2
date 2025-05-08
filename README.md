@@ -85,4 +85,13 @@ ________________________________________
 •	Security Analyst: Integrate Wiz.io and analyze vulnerability trends.
 ________________________________________
 
+Hi RJ,
 
+The Kronos Data Hub project is currently on hold due to environment renaming updates initiated by UKG. As part of the renaming of the Pro WFM regions, the application tenant originally labeled “UAT” is now being updated to “DEV.” This change has impacted the Data Hub and associated SFTP connections.
+
+UKG is in the process of updating the Data Hub environment and connection mappings accordingly (e.g., mta-dev-dhub.npr.mykronos.com). Once these updates are completed, including the application of correct admin access and service account permissions, we will be able to proceed with the GCP configuration and related activities.
+
+Appreciate your patience and understanding.
+
+Best regards,
+Harshini
