@@ -15,3 +15,19 @@ Privilege Misuse – Without user audits, excessive permissions may go undetecte
 Uncontrolled Network Access – Missing firewall rule validation could expose workloads to threats.
 
 Limited Observability – Logs not integrated with Splunk and alerts not configured can delay incident response.
+
+
+
+****
+
+Fragmented GCP project structure increases complexity in managing workloads and impedes effective disaster recovery implementation.
+
+Elevated security risks due to inconsistent IAM policies and lack of centralized identity federation with Azure AD.
+
+Manual and resource-heavy operations for access reviews, identity management, and policy enforcement, leading to limited visibility and siloed alerting.
+
+Greater audit and compliance burdens stemming from inconsistent logging, monitoring, and lack of policy standardization.
+
+Higher GCP spend due to inefficient resource allocation, lack of automation, and missed opportunities for committed use discounts.
+
+Reduced agility and innovation due to non-standardized environments, making scaling and new service adoption more difficult.
