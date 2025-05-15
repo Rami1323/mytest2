@@ -120,3 +120,9 @@ Waiting on minimum compute and storage requirements to finalize design and cost.
 Planning to have the draft of the network design diagram ready before the next sync-up.
 
 Identified a few technical and integration concerns – to be discussed in the next meeting.
+
+
+aws ec2 describe-instances \
+  --filters "Name=instance-state-name,Values=stopped" \
+  --query "Reservations[*].Instances[*].[InstanceId,InstanceType,PlatformDetails]" \
+  --output json | jq -r '.[][] | @csv' > ec2_instances.csv
