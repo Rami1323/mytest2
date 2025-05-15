@@ -101,3 +101,22 @@ https://drive.google.com/file/d/1hPbHwTHuIJiKZ51KlSNU0h-VoEw7zi1F/view?usp=shari
 
 https://viewer.diagrams.net/?tags=%7B%7D&lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&dark=auto#G1hPbHwTHuIJiKZ51KlSNU0h-VoEw7zi1F
 
+
+Key Milestones (for this period)
+Key Milestones	Target Completion Date	% Complete	Comments
+Kickoff & Overview Meeting with Tunnel View Systems	[Enter Date]	100%	Current system and flow explained by Tunnel View team.
+Design & Cost Estimation Preparation	[Enter Date]	40%	Initial draft in progress; awaiting compute & storage requirements.
+Minimum Compute & Storage Requirement Gathering	[Enter Date]	10%	Pending inputs from Tunnel View team.
+Network Diagram Design Draft	[Enter Date]	30%	Will be completed before next team discussion.
+Review Pending Concerns with Team	[Next Meeting Date]	0%	Will be discussed in upcoming meeting.
+
+🟢 Highlights (enter this in the “Highlights” section of the template)
+Conducted a detailed overview meeting with Tunnel View Systems; gained insights into current application flow and architecture.
+
+Initiated design planning and resource cost estimation.
+
+Waiting on minimum compute and storage requirements to finalize design and cost.
+
+Planning to have the draft of the network design diagram ready before the next sync-up.
+
+Identified a few technical and integration concerns – to be discussed in the next meeting.
