@@ -171,4 +171,4 @@ How will users or applications access processed data?
 
 Through an API, portal, direct file access, etc.?
 
-
+ VM availability — does the virtual machine need to be running all the time, or is it enough for it to start only when a specific job or task needs to run?
