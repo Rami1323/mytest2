@@ -172,3 +172,27 @@ How will users or applications access processed data?
 Through an API, portal, direct file access, etc.?
 
  VM availability — does the virtual machine need to be running all the time, or is it enough for it to start only when a specific job or task needs to run?
+
+
+
+
+
+ ==================================
+
+ Scope:
+Tunnel View Modernization is a critical initiative to enhance the MTA's in-house application responsible for capturing and analyzing subway infrastructure visuals using onboard Ladybug Camera Systems. These cameras generate raw video (PGR) and telemetry logs (LDS), which are securely transferred from on-premises to Azure using SFTP endpoints or VPN/ExpressRoute connections.
+
+The solution leverages Azure-native services — including Azure Blob Storage, File Storage (via Private Endpoints), Azure Functions, VM Scale Sets, ArcPy scripting, SQL Databases, and Power BI — to build a secure and scalable data processing pipeline. The system ensures all resources are isolated using Azure VNets, subnets with NSGs, private DNS zones, and RBAC policies. Monitoring and threat protection are enabled via Azure Monitor and Defender for Cloud.
+
+Desired Outcome:
+To design and implement a secure, scalable, and automated pipeline that captures, transfers, processes, and analyzes transit video and telemetry data in real time and historically. This includes:
+
+Enabling private, encrypted transfer of onboard data to Azure.
+
+Processing and transforming raw video and LDS logs into geospatially enriched outputs (JPG, CSV, OIC).
+
+Storing processed outputs in secure Azure Blob and File storage for access by GIS platforms and dashboards.
+
+Integrating analytics and monitoring tools (e.g., Power BI, ArcGIS Pro, Log Analytics) to support operational decision-making.
+
+Minimizing manual intervention through automation and improving the reliability, security, and efficiency of data flows across the system.
