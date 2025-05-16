@@ -126,3 +126,49 @@ aws ec2 describe-instances \
   --filters "Name=instance-state-name,Values=stopped" \
   --query "Reservations[*].Instances[*].[InstanceId,InstanceType,PlatformDetails]" \
   --output json | jq -r '.[][] | @csv' > ec2_instances.csv
+
+
+  ================================
+  Hi [Team/Project Owner],
+
+I have a few concerns and clarifications regarding the Tunnel View project architecture. To help us plan and provision the infrastructure appropriately, could you please provide detailed responses to the following points:
+
+1. Storage Requirements
+What is the minimum required blob storage size?
+
+Do you require direct access to Blob Storage for any applications or users?
+
+2. Virtual Machine (VM) Specifications
+What is the expected VM capacity (vCPUs, RAM, disk)?
+
+How many VMs will be required initially?
+
+Do you require High Availability (HA) setup or scaling?
+
+Are there any specific software tools that need to be installed on the VMs?
+
+3. Data Ingestion and Processing
+How frequently is data uploaded to the system?
+
+How often is data processed?
+
+Is data processed in real-time, near real-time, or batch mode?
+
+4. Database Requirements
+Do you need a database (e.g., PostgreSQL)?
+
+If yes, what kind of data will be stored?
+
+What is the estimated size and IOPS requirement?
+
+5. Caching Layer
+Do you need a caching mechanism (e.g., Redis, Memcached)?
+
+If yes, what will be cached, and how frequently is it accessed?
+
+6. Access Patterns
+How will users or applications access processed data?
+
+Through an API, portal, direct file access, etc.?
+
+
