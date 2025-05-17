@@ -1,0 +1,26 @@
+Resource Type,Description,AWS CLI Command
+CloudWatch Dashboards,"UI views only, no runtime impact",aws cloudwatch list-dashboards
+CloudWatch Alarms (non-critical),"Alerting logic, not service-breaking",aws cloudwatch describe-alarms
+CloudWatch Log Groups (no logs),Can be deleted if not active,aws logs describe-log-groups
+Security Groups (unused),No effect unless attached,"aws ec2 describe-security-groups --query ""SecurityGroups[?length(IpPermissions)==`0` && length(IpPermissionsEgress)==`0`]"""
+NACLs (not in use),No impact unless attached,aws ec2 describe-network-acls
+Route 53 Hosted Zones (unused),Only affects DNS,aws route53 list-hosted-zones
+VPC Endpoints (not in use),No effect unless tied to services,aws ec2 describe-vpc-endpoints
+IAM Roles (unused),Safe if not used in policies/instances,aws iam list-roles
+IAM Policies (not attached),No effect if not attached,aws iam list-policies --scope Local
+IAM Users (inactive),Safe if not used/accessed,aws iam list-users
+CloudFormation Stacks (test),If not provisioning prod resources,aws cloudformation describe-stacks
+Step Functions (idle/test),Not active = safe,aws stepfunctions list-state-machines
+EventBridge Rules (disabled),Disabled rules are safe,aws events list-rules
+CodeBuild Projects (unused),Can be cleaned if not triggered,aws codebuild list-projects
+CodePipeline (disabled/test),No builds = non-critical,aws codepipeline list-pipelines
+ELB/ALB (no targets),No backend = safe to delete,aws elbv2 describe-load-balancers
+Target Groups (no instances),Safe unless attached,aws elbv2 describe-target-groups
+Key Pairs (unused),Only for SSH,aws ec2 describe-key-pairs
+Launch Templates (old/test),Safe unless referenced,aws ec2 describe-launch-templates
+Placement Groups (empty),Safe if no instance assigned,aws ec2 describe-placement-groups
+Snapshots (manual/test),If not tied to backups,aws ec2 describe-snapshots --owner-ids self
+CloudTrail (not org-wide),Safe if not your primary trail,aws cloudtrail describe-trails
+Unattached EBS Volumes,Volumes in 'available' state,"aws ec2 describe-volumes --filters Name=status,Values=available --query ""Volumes[*].{ID:VolumeId,Size:Size}"""
+Unused Elastic IPs,EIPs not associated with any instance,"aws ec2 describe-addresses --query ""Addresses[?AssociationId==null].[PublicIp,AllocationId]"""
+Stopped EC2 Instances,Instances in 'stopped' state,"aws ec2 describe-instances --filters Name=instance-state-name,Values=stopped --query ""Reservations[*].Instances[*].[InstanceId,State.Name,Tags[?Key=='Name']|[0].Value]"""
