@@ -196,3 +196,77 @@ Storing processed outputs in secure Azure Blob and File storage for access by GI
 Integrating analytics and monitoring tools (e.g., Power BI, ArcGIS Pro, Log Analytics) to support operational decision-making.
 
 Minimizing manual intervention through automation and improving the reliability, security, and efficiency of data flows across the system.
+
+
+
+
+
+
+
+
+
+
+aws ec2 describe-volumes --filters Name=status,Values=available
+
+aws ec2 describe-instances \
+  --filters Name=instance-state-name,Values=stopped \
+  --query "Reservations[*].Instances[*].[InstanceId,State.Name,Tags[?Key=='Name']|[0].Value]" \
+  --output table
+
+  aws ec2 describe-instances \
+  --filters Name=instance-state-name,Values=stopped \
+  --query "Reservations[*].Instances[*].InstanceId" \
+  --output text
+
+  aws ec2 describe-addresses \
+  --query "Addresses[?AssociationId==null].[PublicIp,AllocationId]" \
+  --output table
+
+  
+
+
+
+
+  ✅ Non-Disruptive AWS Resources List
+1. Monitoring & Logging (Non-Critical by Default)
+Resource Type	Notes
+CloudWatch Dashboards	Deleting affects UI only, not actual monitoring or metrics
+CloudWatch Alarms	Alerting stops, but services continue to run
+CloudWatch Metric Filters	Logging continues; just filter/alerts lost
+Log Groups (if empty)	Safe if not storing active logs
+CloudTrail Trails (if not org-wide)	Disables auditing, but doesn't affect operations
+
+2. Networking (Supporting/Stateless)
+Resource Type	Notes
+Security Groups (unused)	Deletion has no impact unless attached to a resource
+NACLs (unused)	No impact if not associated with subnets
+Route53 Hosted Zones (unused/test domains)	No impact if not in use
+VPC Endpoints (not used)	Safe if not linked to running workloads
+
+3. IAM & Access (Non-attached)
+Resource Type	Notes
+IAM Roles (unused)	No impact unless in use by a service
+IAM Policies (not attached)	Safe to delete if not bound to any identity/resource
+IAM Users (disabled)	Safe if not used for login/programmatic access
+
+4. Automation / Orchestration
+Resource Type	Notes
+CloudFormation Stacks (test/dev)	Safe if not managing production resources
+Step Functions (idle/test)	Safe unless actively orchestrating services
+EventBridge Rules (disabled)	No impact unless tied to critical automation
+CodeBuild Projects (unused)	Safe if not part of CI/CD pipeline
+CodePipeline (not deployed)	Safe if not tied to a production release process
+
+5. Elastic Load Balancer (Stateless)
+Resource Type	Notes
+ELBs (no targets or traffic)	Safe to delete if not routing production traffic
+Target Groups (not registered)	Safe unless bound to an active ALB/NLB
+
+6. EC2 Related Resources
+Resource Type	Notes
+Key Pairs (unused)	Can delete if not used to SSH into instances
+Launch Templates (old/test)	Safe unless referenced by ASGs or new launches
+Placement Groups (empty)	No disruption if no instance is using them
+Snapshots (manual/test)	Non-critical unless tied to backups needed for restore
+
+
