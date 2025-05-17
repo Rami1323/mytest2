@@ -236,6 +236,9 @@ aws ec2 describe-volumes \
   --output table
 
 
+aws ec2 describe-volumes --filters Name=status,Values=available --query "Volumes[*].[VolumeId,Size,AvailabilityZone,State,Tags[?Key=='Name']|[0].Value]" --output table
+
+
 
   ✅ Non-Disruptive AWS Resources List
 1. Monitoring & Logging (Non-Critical by Default)
