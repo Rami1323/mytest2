@@ -206,6 +206,9 @@ aws ec2 describe-instances --filters Name=instance-state-name,Values=stopped --q
 aws ec2 describe-addresses --query "Addresses[?AssociationId==null].[PublicIp,AllocationId]" --output table
 
 
+echo "Stopped EC2 Instances (with Name tag)"; aws ec2 describe-instances --filters Name=instance-state-name,Values=stopped --query "Reservations[].Instances[].[InstanceId,State.Name,Tags[?Key=='Name']|[0].Value]" --output table; \
+echo "Stopped EC2 Instance IDs Only"; aws ec2 describe-instances --filters Name=instance-state-name,Values=stopped --query "Reservations[].Instances[].InstanceId" --output table; \
+echo "Unused Elastic IPs"; aws ec2 describe-addresses --query "Addresses[?AssociationId==null].[PublicIp,AllocationId]" --output table
 
 
 
