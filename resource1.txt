@@ -1,0 +1,47 @@
+#!binbash
+
+# Output file setup
+output_file=aws_resource_check_$(date +%F).log
+echo 📋 AWS Resource Check Report - $(date)  $output_file
+echo ------------------------------------------  $output_file
+
+# Helper function
+check() {
+  echo -e n🔍 Checking $1  tee -a $output_file
+  echo Command $2  $output_file
+  eval $2  $output_file 2&1
+}
+
+# Unattached EBS Volumes
+check Unattached EBS Volumes 
+aws ec2 describe-volumes --filters Name=status,Values=available 
+--query Volumes[].[VolumeId,Size,AvailabilityZone,State,Tags[Key=='Name'][0].Value] --output table
+
+# Stopped EC2 Instances (with Name)
+check Stopped EC2 Instances (with Name tag) 
+aws ec2 describe-instances --filters Name=instance-state-name,Values=stopped 
+--query Reservations[].Instances[].[InstanceId,State.Name,Tags[Key=='Name'][0].Value] --output table
+
+# Stopped EC2 Instance IDs only
+check Stopped EC2 Instance IDs only 
+aws ec2 describe-instances --filters Name=instance-state-name,Values=stopped 
+--query Reservations[].Instances[].InstanceId --output table
+
+# Unused Elastic IPs
+check Unused Elastic IPs 
+aws ec2 describe-addresses 
+--query Addresses[AssociationId==null].[PublicIp,AllocationId] --output table
+
+# Additional Non-Disruptive Resources
+check CloudWatch Dashboards aws cloudwatch list-dashboards
+check Unused Security Groups 
+aws ec2 describe-security-groups --query SecurityGroups[length(IpPermissions)==`0` && length(IpPermissionsEgress)==`0`]
+check IAM Roles aws iam list-roles
+check IAM Policies (Local) aws iam list-policies --scope Local
+check VPC Endpoints aws ec2 describe-vpc-endpoints
+check Step Functions aws stepfunctions list-state-machines
+check Snapshots (owned) aws ec2 describe-snapshots --owner-ids self
+check CodePipelines aws codepipeline list-pipelines
+check EventBridge Rules aws events list-rules
+
+echo -e n✅ Done! Output saved to $output_file  tee -a $output_file
