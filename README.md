@@ -199,7 +199,11 @@ Minimizing manual intervention through automation and improving the reliability,
 
 
 
+aws ec2 describe-instances --filters Name=instance-state-name,Values=stopped --query "Reservations[].Instances[].[InstanceId,State.Name,Tags[?Key=='Name']|[0].Value]" --output table
 
+aws ec2 describe-instances --filters Name=instance-state-name,Values=stopped --query "Reservations[].Instances[].InstanceId" --output text
+
+aws ec2 describe-addresses --query "Addresses[?AssociationId==null].[PublicIp,AllocationId]" --output table
 
 
 
