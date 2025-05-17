@@ -229,8 +229,11 @@ aws ec2 describe-instances \
   --query "Addresses[?AssociationId==null].[PublicIp,AllocationId]" \
   --output table
 
-  
-
+ ********************************************************* 
+aws ec2 describe-volumes \
+  --filters Name=status,Values=available \
+  --query "Volumes[*].[VolumeId,Size,AvailabilityZone,State,Tags[?Key=='Name']|[0].Value]" \
+  --output table
 
 
 
