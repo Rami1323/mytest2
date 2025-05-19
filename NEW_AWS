@@ -1,0 +1,53 @@
+Resource/Action	Disruption Level
+Reserved Instance Optimization (EC2/RDS/ElastiCache)	Non-Disruptive
+Idle Load Balancers	Non-Disruptive
+Inactive NAT Gateways	Non-Disruptive
+S3 Incomplete Multipart Upload Configuration	Non-Disruptive
+Savings Plan	Non-Disruptive
+Unassociated Elastic IPs	Non-Disruptive
+Underutilized EBS Volumes	Non-Disruptive (if managed carefully)
+Idle RDS DB Instances	Disruptive if stopped/terminated
+Low Utilization EC2 Instances	Disruptive if stopped/resized
+
+=============================================
+✅ Non-Disruptive AWS Resources/Actions
+These can typically be applied without causing downtime or service interruption:
+
+Amazon EC2 Reserved Instances Optimization
+
+Amazon ElastiCache Reserved Node Optimization
+
+Amazon RDS Reserved Instance Optimization
+
+Idle Load Balancers
+
+Inactive NAT Gateways
+
+S3 Incomplete Multipart Upload Abort Configuration
+
+Savings Plan
+
+Unassociated Elastic IP Addresses
+
+Underutilized Amazon EBS Volumes (can be analyzed or scheduled for snapshot and removal)
+
+⚠️ Disruptive AWS Resources/Actions
+These may require service downtime, reconfiguration, or impact running workloads:
+
+Amazon RDS Idle DB Instances (if terminated or stopped, downtime occurs)
+
+Low Utilization Amazon EC2 Instances (stopping or resizing may impact applications)
+
+==========================================================================
+AWS Resource/Action	Disruption Level	Notes
+Amazon EC2 Reserved Instances Optimization	Non-Disruptive	Can switch purchasing strategy without affecting running instances
+Amazon ElastiCache Reserved Node Optimization	Non-Disruptive	Changes billing model; no runtime changes
+Amazon RDS Reserved Instance Optimization	Non-Disruptive	Applies to billing; no service impact
+Idle Load Balancers	Non-Disruptive	Removal has no impact if they're unused
+Inactive NAT Gateways	Non-Disruptive	Can be deleted if not routing traffic
+S3 Incomplete Multipart Upload Abort Configuration	Non-Disruptive	Helps reclaim storage automatically; no runtime impact
+Savings Plan	Non-Disruptive	Affects billing only
+Unassociated Elastic IP Addresses	Non-Disruptive	Not attached to any resource; safe to release
+Underutilized Amazon EBS Volumes	Non-Disruptive	Safe to snapshot and delete after analysis
+Amazon RDS Idle DB Instances	Disruptive	Stopping/deleting causes downtime
+Low Utilization Amazon EC2 Instances	Disruptive	Stopping/resizing can disrupt applications
