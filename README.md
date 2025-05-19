@@ -282,4 +282,42 @@ Launch Templates (old/test)	Safe unless referenced by ASGs or new launches
 Placement Groups (empty)	No disruption if no instance is using them
 Snapshots (manual/test)	Non-critical unless tied to backups needed for restore
 
+=================================================================================
+Sub CombineExcelFilesAsSheets()
+
+    Dim myDialog As FileDialog
+    Dim myFolder As String, myFile As String
+    Dim sourceWorkbook As Workbook
+    Dim sourceSheet As Worksheet
+    Dim newSheet As Worksheet
+
+    ' Select folder with Excel files
+    Set myDialog = Application.FileDialog(msoFileDialogFolderPicker)
+
+    If myDialog.Show = -1 Then
+        myFolder = myDialog.SelectedItems(1) & Application.PathSeparator
+        myFile = Dir(myFolder & "*.xls*")
+
+        Application.ScreenUpdating = False
+
+        Do While myFile <> ""
+            Set sourceWorkbook = Workbooks.Open(myFolder & myFile)
+            
+            ' Copy the first worksheet only (modify if you want all)
+            Set sourceSheet = sourceWorkbook.Sheets(1)
+            sourceSheet.Copy After:=ThisWorkbook.Sheets(ThisWorkbook.Sheets.Count)
+            
+            ' Rename the new sheet to match the file name (without extension)
+            Set newSheet = ThisWorkbook.Sheets(ThisWorkbook.Sheets.Count)
+            newSheet.Name = Left(myFile, InStrRev(myFile, ".") - 1)
+
+            sourceWorkbook.Close SaveChanges:=False
+            myFile = Dir
+        Loop
+
+        Application.ScreenUpdating = True
+        MsgBox "Files combined successfully!", vbInformation
+    End If
+
+End Sub
 
