@@ -1,0 +1,19 @@
+Sub GetSheets()
+    ' Update ExcelJunction.com
+
+    Dim Path As String
+    Dim Filename As String
+    Dim Sheet As Worksheet
+
+    Path = "Y:\Shields\Testing\"
+    Filename = Dir(Path & "*.xls")
+
+    Do While Filename <> ""
+        Workbooks.Open Filename:=Path & Filename, ReadOnly:=True
+        For Each Sheet In ActiveWorkbook.Sheets
+            Sheet.Copy After:=ThisWorkbook.Sheets(ThisWorkbook.Sheets.Count)
+        Next Sheet
+        Workbooks(Filename).Close SaveChanges:=False
+        Filename = Dir()
+    Loop
+End Sub
