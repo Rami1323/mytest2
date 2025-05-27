@@ -321,3 +321,29 @@ Sub CombineExcelFilesAsSheets()
 
 End Sub
 
+================================================================
+
+Today : 
+
+5/27/2025
+
+Subject: MoM: Tunnel View Project – Requirement Gathering & Clarifications
+Hi Team,
+Thank you for the productive meeting regarding the Tunnel View project. Please find below the summary of key discussion points and responses provided by the team:
+We discussed the infrastructure and processing requirements in detail. The following points were covered:
+•	The team confirmed that highly provisioned VMs will be needed. **These VMs do not need to be continuously available; they will be brought up on-demand during job execution and shut down afterward to optimize costs. Automation will handle the provisioning and deprovisioning**.
+•	Regarding the python script, it supports concurrent execution and can run on multiple VMs. **The script will handle parallel processing efficiently**.
+•	There is no current need for a database. **The solution will run without any DB unless requirements change later.**
+•	The data ingestion will occur in batch mode, with approximately 900GB of data per month. **The system will process about 30GB per day.**
+•	We discussed the need for a caching mechanism (such as Redis or Memcached). **The team will confirm what data should be cached and how frequently it will be accessed.**
+•	Access to processed data will be available via APIs, portals, or direct file access. **Users already have access to Azure blob storage from previous projects**.
+•	For monitoring, basic tools will be enabled for the VMs. **The server team will handle additional security components if required.**
+•	It was suggested that providing cost estimates would be helpful. **This will include cost implications of VM usage, data processing, and storage.**
+•	Image processing is performed from Monday to Thursday using a geometric car. **Each day focuses on a specific segment of the system. The system retains one year’s worth of images.**
+•	Esri is responsible for configuring the Python scripts within the application.
+•	Some team members may already have access to the previous environment, which can be reused or verified as needed.
+•	High Availability (HA) is optional. Not required as of now .
+
+Please feel free to respond with corrections or additions. Looking forward to the next steps.
+Best regards,
+
